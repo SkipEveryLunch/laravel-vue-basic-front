@@ -12,6 +12,11 @@
             Users
           </router-link>
         </li>
+        <li class="nav-item">
+          <router-link to="/register" active-class="active" class="nav-link">
+            Register
+          </router-link>
+        </li>
       </ul>
 
     </div>
