@@ -23,14 +23,15 @@ export default {
     const email = ref("");
     const password = ref("");
     const passwordConfirm = ref("");
-    const submit =():void=>{
-      axios.post("http://localhost:8000/api/register",
+    const submit =async ():void=>{
+      const {data} = await axios.post("http://localhost:8000/api/register",
       { first_name: firstName.value,
         last_name: lastName.value,
         email: email.value,
         password: password.value,
         password_confirm: passwordConfirm.value,
-        }).then(res=>console.log(res));
+        });
+        console.log(data);
     };
     return {
       firstName,lastName,email,password,passwordConfirm,submit
