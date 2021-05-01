@@ -34,7 +34,7 @@ export default {
         password: password.value,
         password_confirm: passwordConfirm.value,
         });
-        router.push("/login");
+        await router.push("/login");
     };
     return {
       firstName,lastName,email,password,passwordConfirm,submit

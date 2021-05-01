@@ -15,7 +15,7 @@
       <div class="mb-3">
         <label>Role Id</label>
         <select v-model="data.role_id" class="form-control" name="role_id">
-          <option v-for="role of roles" :key="role.id" :value="role.id">{{role.name}}</option>
+          <option v-for="role in roles" :key="role.id" :value="role.id">{{role.name}}</option>
         </select>
       </div>
       <button class="btn btn-outline-secondary">Save</button>
@@ -42,7 +42,7 @@ export default {
     });
     const submit = async () =>{
       const response = await axios.post("users",data)
-      router.push("/users");
+      await router.push("/users");
     }
     return {data,submit,roles};
   }

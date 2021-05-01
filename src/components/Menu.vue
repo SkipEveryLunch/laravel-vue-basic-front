@@ -17,9 +17,14 @@
             Register
           </router-link>
         </li>
-                <li class="nav-item">
+        <li class="nav-item">
           <router-link to="/login" active-class="active" class="nav-link">
             Login
+          </router-link>
+        </li>
+        <li class="nav-item">
+          <router-link to="/roles" active-class="active" class="nav-link">
+            Roles
           </router-link>
         </li>
       </ul>
