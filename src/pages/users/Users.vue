@@ -1,4 +1,8 @@
 <template>
+  <div class="pt-3 pb-2 mb-3 border-bottom">
+    <router-link to="/users/create" class="btn btn-sm btn-outline-secondary">Add</router-link>
+  </div>
+
   <div class="table-responsive">
     <table class="table table-striped table-sm">
       <thead>
@@ -72,7 +76,7 @@ export default {
       }
     };
     onMounted(async()=>{
-      load();
+      await load();
     });
     watch(page,load);
     return {
