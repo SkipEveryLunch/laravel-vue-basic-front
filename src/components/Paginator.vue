@@ -22,7 +22,6 @@ export default {
   context:SetupContext){
     const page = ref(1);
     const next=()=>{
-            
       if(page.value<props.lastPage){
         page.value += 1;
       }

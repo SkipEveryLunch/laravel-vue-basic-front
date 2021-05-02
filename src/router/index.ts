@@ -9,6 +9,8 @@ import RolesEdit from "@/pages/roles/RolesEdit.vue"
 import Products from "@/pages/products/Products.vue"
 import ProductsCreate from "@/pages/products/ProductsCreate.vue"
 import ProductsEdit from "@/pages/products/ProductsEdit.vue"
+import Orders from "@/pages/orders/Orders.vue"
+import Profile from "@/pages/Profile.vue"
 import Register from "@/pages/Register.vue"
 import Login from "@/pages/Login.vue"
 import Wrapper from "@/components/Wrapper.vue"
@@ -39,6 +41,8 @@ const routes: Array<RouteRecordRaw> = [
     { path:"/products",component:Products},
     { path:"/products/create",component:ProductsCreate},
     { path:"/products/:id/edit",component:ProductsEdit},
+    { path:"/orders",component:Orders},
+    { path:"/profile",component:Profile},
     {path:"",component:Dashboard},
     
   ]
