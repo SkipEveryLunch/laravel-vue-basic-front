@@ -6,6 +6,7 @@ import UsersEdit from "@/pages/users/UsersEdit.vue"
 import Roles from "@/pages/roles/Roles.vue"
 import RolesCreate from "@/pages/roles/RolesCreate.vue"
 import RolesEdit from "@/pages/roles/RolesEdit.vue"
+import Products from "@/pages/products/Products.vue"
 import Register from "@/pages/Register.vue"
 import Login from "@/pages/Login.vue"
 import Wrapper from "@/components/Wrapper.vue"
@@ -33,7 +34,9 @@ const routes: Array<RouteRecordRaw> = [
     { path:"/roles",component:Roles},
     { path:"/roles/create",component:RolesCreate},
     { path:"/roles/:id/edit",component:RolesEdit},
-    {path:"",component:Dashboard}
+    { path:"/products",component:Products},
+    {path:"",component:Dashboard},
+    
   ]
 }
 ]

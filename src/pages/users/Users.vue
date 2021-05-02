@@ -32,42 +32,24 @@
     </table>
   </div>
 
-    <nav>
-    <ul class="pagination">
-      <li class="page-item">
-        <a class="page-link" href="javascript:void(0)" @click="prev">Previous</a>
-      </li>
-      <li class="page-item">
-        <a class="page-link" href="javascript:void(0)" @click="next">Next</a>
-      </li>
-    </ul>
-  </nav>
+  <Paginator :last-page="lastPage" @page-changed="load($event)"/>
 </template>
 
 <script lang="ts">
-import {onMounted,ref,watch} from "vue";
+import {onMounted,ref} from "vue";
 import axios from "axios";
 import {User} from "@/models/user";
+import Paginator from "@/components/Paginator.vue";
 export default {
   name: "Users",
+  components:{Paginator},
   setup(){
     const users = ref([]);
-    const page = ref(1);
     const lastPage = ref(0);
-    const load = async() =>{
-      const {data} = await axios.get(`users?page=${page.value}`);
+    const load = async(page=1) =>{
+      const {data} = await axios.get(`users?page=${page}`);
       users.value = data.data;
       lastPage.value = data.meta.last_page;
-    };
-    const next=()=>{
-      if(page.value<lastPage.value){
-        page.value += 1;
-      }
-    };
-    const prev=()=>{
-     if(page.value>0){
-       page.value -= 1;
-     }
     };
     const onDelete =async(id:number)=>{
       if(confirm("are you sure?")){
@@ -80,9 +62,8 @@ export default {
     onMounted(async()=>{
       await load();
     });
-    watch(page,load);
     return {
-      users,next,prev,onDelete
+      users,onDelete,load,lastPage
     };
   }
 }
