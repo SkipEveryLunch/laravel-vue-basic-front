@@ -24,14 +24,15 @@
 </template>
 <script lang="ts">
 import axios from "axios";
-import {reactive} from "vue";
-import {useRouter} from "vue-router";
+import {reactive,onMounted} from "vue";
+import {useRouter,useRoute} from "vue-router";
 import ImageUpload from "@/components/ImageUpload.vue";
 export default {
-  name:"ProductsCreate",
+  name:"ProductsEdit",
   components:{ImageUpload},
   setup(){
     const router = useRouter();
+    const route = useRoute();
     const formData = reactive({
       title: '',
       description: '',
@@ -39,9 +40,19 @@ export default {
       price: ''
     })
     const onSubmit =async()=>{
-      await axios.post("products",formData);
+      await axios.put(`products/${route.params.id}`,formData);
       router.push("/products");
     }
+    const load =async()=>{
+      const {data} = await axios.get(`products/${route.params.id}`);
+      formData.title = data.title;
+      formData.description = data.description;
+      formData.image = data.image;
+      formData.price = data.price;
+    };
+    onMounted(() => {
+      load();
+    })
     return{
       formData,onSubmit
     };
