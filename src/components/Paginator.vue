@@ -11,7 +11,7 @@
   </nav>
 </template>
 <script lang="ts">
-import {ref,watch,SetUpContext} from "vue";
+import {ref,watch,SetupContext} from "vue";
 export default {
   name:"Paginator",
   emits:["page-changed"],
@@ -19,7 +19,7 @@ export default {
     lastPage:Number
   },
   setup(props:{lastPage:number},
-  context:SetUpContext){
+  context:SetupContext){
     const page = ref(1);
     const next=()=>{
             
@@ -30,7 +30,6 @@ export default {
     const prev=()=>{
      if(page.value>1){
        page.value -= 1;
-       console.log(page.value);
      }
     };
     watch(page,()=>{
