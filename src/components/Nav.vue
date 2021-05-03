@@ -11,17 +11,21 @@
 
 <script lang="ts">
 import axios from "axios";
-import {onMounted,ref} from "vue";
+import {computed,ref,watch} from "vue";
 import {useRouter} from "vue-router";
+import {useStore} from "vuex";
 
 export default{
   name:"Nav",
   setup(){
     const name = ref("");
     const router = useRouter();
-    onMounted(async()=>{
-      const {data:{first_name,last_name}} = await axios.get("user");
-      name.value = `${first_name} ${last_name}`;
+    const store = useStore();
+    const user = computed(()=>{
+      return store.state.User.user;
+      });
+    watch(user,()=>{
+      name.value = `${user.value.first_name} ${user.value.last_name}`;
     });
     const logout = async() =>{
       const {data} = await axios.delete("logout");

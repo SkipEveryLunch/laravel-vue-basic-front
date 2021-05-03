@@ -32,11 +32,13 @@
   </form>
 </template>
 <script lang="ts">
-import {reactive,onMounted} from "vue";
+import {reactive,watch,computed} from "vue";
+import {useStore} from "vuex";
 import axios from "axios";
 export default {
   name:"Profile",
   setup(){
+    const store = useStore();
     const infoData = reactive({
       first_name: '',
       last_name: '',
@@ -46,24 +48,23 @@ export default {
       password: '',
       password_confirm: ''
     })
-    const loadInfo =async()=>{
-      const {data} = await axios.get("user");
-      infoData.first_name = data.first_name;
-      infoData.last_name = data.last_name;
-      infoData.email = data.email;
-    }
+    const user = computed(()=>{
+      return store.state.User.user;
+      });
+    watch(user,()=>{
+      infoData.first_name = user.value.first_name;
+      infoData.last_name = user.value.last_name;
+      infoData.email = user.value.email;
+    })
+
     const infoSubmit =async()=>{
       const {data} = await axios.put("user/info",infoData);
-      console.log(data);
-      loadInfo();
+      store.dispatch("User/setUser",data);
     }
     const passwordSubmit =async()=>{
       await axios.put("user/password",passwordData)
       alert("changed");
     }
-    onMounted(()=>{
-      loadInfo();
-    })
     return{
       infoData,
       passwordData,
